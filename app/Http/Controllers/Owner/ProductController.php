@@ -15,9 +15,8 @@ use App\Models\Owner;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 use App\Http\Requests\ProductRequest;
-
 use function PHPSTORM_META\map;
-
+use App\Constants\Common as Constant; //マジックナンバーの解決としてエイリアス設定したConstantを使う
 class ProductController extends Controller
 {
     public function __construct()
@@ -184,10 +183,10 @@ class ProductController extends Controller
                     $product->is_selling = $request->is_selling;
                     $product->save();
 
-                if($request->type === \Constant::PRODUCT_LIST['add']){
+                if($request->type === Constant::PRODUCT_LIST['add']){
                     $newQuantity = $request->quantity;
                 }
-                if($request->type === \Constant::PRODUCT_LIST['reduce']){
+                if($request->type === Constant::PRODUCT_LIST['reduce']){
                     $newQuantity = $request->quantity * -1;
                 }
 

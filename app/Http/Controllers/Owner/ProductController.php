@@ -169,7 +169,8 @@ class ProductController extends Controller
         } else {
 
             try{
-            DB::transaction(function () use($request, $product) {
+                DB::transaction(function () use($request, $product) {
+
                     $product->name = $request->name;
                     $product->information = $request->information;
                     $product->price = $request->price;
@@ -183,12 +184,12 @@ class ProductController extends Controller
                     $product->is_selling = $request->is_selling;
                     $product->save();
 
-                    if($request->type === \Constant::PRODUCT_LIST['add']){
-                        $newQuantity = $request->quantity;
-                    }
-                    if($request->type === \Constant::PRODUCT_LIST['reduce']){
-                        $newQuantity = $request->quantity * -1;
-                    }
+                if($request->type === \Constant::PRODUCT_LIST['add']){
+                    $newQuantity = $request->quantity;
+                }
+                if($request->type === \Constant::PRODUCT_LIST['reduce']){
+                    $newQuantity = $request->quantity * -1;
+                }
 
                 Stock::create([
                     'product_id' => $product->id,
@@ -216,6 +217,12 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        Product::findOrFail($id)->delete();
+
+        return redirect()
+        ->route('owner.products.index')
+        ->with(['message' => '商品を削除しました。',
+        'status' => 'alert']);
     }
 }

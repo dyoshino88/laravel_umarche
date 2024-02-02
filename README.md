@@ -6,13 +6,14 @@ https://github.com/aokitashipro/laravel_umarche
 
 ## ダウンロード方法
 
-- git clone
+-   git clone
+
 ```
 git clone https://github.com/aokitashipro/laravel_umarche.git
 ```
 
-- git clone ブランチを指定してダウンロードする場合<br>
-git clone -b ブランチ名 https://github.com/aokitashipro/laravel_umarche.git
+-   git clone ブランチを指定してダウンロードする場合<br>
+    git clone -b ブランチ名 https://github.com/aokitashipro/laravel_umarche.git
 
 もしくは zip ファイルでダウンロードしてください
 
@@ -21,12 +22,15 @@ git clone -b ブランチ名 https://github.com/aokitashipro/laravel_umarche.git
 ```
 cd laravel_umarche
 ```
+
 ```
 composer install
 ```
+
 ```
 npm install
 ```
+
 ```
 npm run dev
 ```
@@ -34,6 +38,7 @@ npm run dev
 .env.example をコピーして .env ファイルを作成
 
 .env ファイルの中の下記をご利用の環境に合わせて変更してください。
+
 ```
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -75,3 +80,18 @@ storage/app/public/products フォルダ内に
 ショップの画像も表示する場合は、
 storage/app/public/shops フォルダを作成し
 画像を保存してください。
+
+## section7 の補足
+
+決済のテストとして strioe を利用しています。
+必要な場合は、.env に stripe の情報を追記してください。
+
+## section8 の補足
+
+メールのテストとして、mailtrap を利用しています。
+必要な場合は、.env に mailtrap の情報を追記してください。
+
+メール処理には時間がかかるので、
+キューを利用した非同期処理を実装しています。
+
+必要な場合は、　 php artisan queue:work でワーカーを立ち上げて動作確認してください。
